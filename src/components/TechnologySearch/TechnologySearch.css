@@ -1,0 +1,87 @@
+.technology-search {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.technology-search__label {
+  display: block;
+}
+
+.technology-search__label > span {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.technology-search__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.technology-search__field input {
+  width: 100%;
+  padding: 12px 50px 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.technology-search__field input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.technology-search__clear {
+  position: absolute;
+  right: 12px;
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: #64748b;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.technology-search__clear:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+
+.technology-search__info {
+  margin: 12px 0 0 0;
+  font-size: 0.9rem;
+  color: #059669;
+  font-weight: 500;
+}
+
+.technology-search__error {
+  margin: 12px 0 0 0;
+  font-size: 0.9rem;
+  color: #dc2626;
+}
+
+.technology-search__hint {
+  margin: 12px 0 0 0;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+

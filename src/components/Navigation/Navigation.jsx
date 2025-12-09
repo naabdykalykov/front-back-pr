@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import './Navigation.css'
 
-function Navigation({ isLoggedIn, onLogout }) {
+function Navigation({ isLoggedIn, username, onLogout }) {
   const location = useLocation()
 
   return (
@@ -44,16 +44,6 @@ function Navigation({ isLoggedIn, onLogout }) {
                 Добавить технологию
               </Link>
             </li>
-            <li>
-              <Link to="/settings" className={location.pathname === '/settings' ? 'active' : ''}>
-                Настройки
-              </Link>
-            </li>
-          <li>
-            <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
-              Панель
-            </Link>
-          </li>
           </>
         )}
       </ul>
@@ -61,15 +51,13 @@ function Navigation({ isLoggedIn, onLogout }) {
       <div className="nav-user">
         {isLoggedIn ? (
           <>
+            {username && <span className="nav-username">{username}</span>}
             <button type="button" onClick={onLogout}>
               Выйти
             </button>
           </>
         ) : (
-          <Link
-            to="/login"
-            className={`btn btn-secondary ${location.pathname === '/login' ? 'active' : ''}`}
-          >
+          <Link to="/" className="btn btn-secondary">
             Войти
           </Link>
         )}

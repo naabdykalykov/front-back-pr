@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import QuickActions from '../components/QuickActions/QuickActions'
 import FilterTabs from '../components/FilterTabs/FilterTabs'
 import TechnologyCard from '../components/TechnologyCard/TechnologyCard'
+import RoadmapImporter from '../components/RoadmapImporter/RoadmapImporter'
+import TechnologySearch from '../components/TechnologySearch/TechnologySearch'
+import TechnologyModal from '../components/TechnologyModal/TechnologyModal'
 
 function TechnologyList({
   technologies,
@@ -12,21 +15,34 @@ function TechnologyList({
   onCompleteAll,
   onResetAll,
   onPickRandom,
+  searchTechnologies,
+  onImportRoadmap,
+  fetchResources,
 }) {
   const [filter, setFilter] = useState('all')
-  const [search, setSearch] = useState('')
+  const [searchState, setSearchState] = useState({ query: '', items: [] })
+  const [selectedTechnology, setSelectedTechnology] = useState(null)
+
+  const sourceList = searchState.query ? searchState.items : technologies
 
   const filteredTechnologies = useMemo(() => {
-    const query = search.trim().toLowerCase()
-    return technologies.filter((tech) => {
+    return sourceList.filter((tech) => {
       const matchesFilter = filter === 'all' ? true : tech.status === filter
-      const matchesSearch =
-        query.length === 0 ||
-        tech.title.toLowerCase().includes(query) ||
-        tech.description.toLowerCase().includes(query)
-      return matchesFilter && matchesSearch
+      return matchesFilter
     })
-  }, [technologies, filter, search])
+  }, [sourceList, filter])
+
+  const handleSearchResults = ({ query, items }) => {
+    setSearchState({ query, items })
+  }
+
+  const handleOpenModal = (tech) => {
+    setSelectedTechnology(tech)
+  }
+
+  const handleCloseModal = () => {
+    setSelectedTechnology(null)
+  }
 
   return (
     <div className="page page-technologies">
@@ -36,15 +52,18 @@ function TechnologyList({
         onPickRandom={onPickRandom}
       />
 
-      <div className="app__search">
-        <input
-          type="text"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Поиск по названию или описанию..."
-        />
-        <span className="app__search-count">Найдено: {filteredTechnologies.length}</span>
-      </div>
+      <RoadmapImporter onImport={onImportRoadmap} />
+
+      <TechnologySearch
+        searchTechnologies={searchTechnologies}
+        onResultsChange={handleSearchResults}
+      />
+
+      {searchState.query && (
+        <p className="technology-list__search-info">
+          Показаны результаты по запросу «{searchState.query}». Найдено: {sourceList.length}
+        </p>
+      )}
 
       <FilterTabs value={filter} onChange={setFilter} />
 
@@ -61,7 +80,13 @@ function TechnologyList({
               onStatusChange={onStatusChange}
             />
             <div className="technology-list__footer">
-              <Link to={`/technologies/${tech.id}`}>Подробнее →</Link>
+              <button
+                type="button"
+                className="technology-list__detail-link"
+                onClick={() => handleOpenModal(tech)}
+              >
+                Подробнее →
+              </button>
               <span className="technology-list__category">{tech.category ?? 'general'}</span>
             </div>
           </div>
@@ -69,16 +94,25 @@ function TechnologyList({
         {filteredTechnologies.length === 0 && (
           <div className="technology-list__empty">
             <p>Ничего не найдено.</p>
-            <p>Попробуйте изменить фильтры или добавить новую технологию.</p>
+            <p>Попробуйте изменить фильтры, сбросить поиск или импортировать дорожную карту.</p>
             <Link to="/add-technology" className="btn btn-secondary">
               Добавить технологию
             </Link>
           </div>
         )}
       </section>
+
+      {selectedTechnology && (
+        <TechnologyModal
+          technology={selectedTechnology}
+          onClose={handleCloseModal}
+          onStatusChange={onStatusChange}
+          onNotesChange={onNotesChange}
+          fetchResources={fetchResources}
+        />
+      )}
     </div>
   )
 }
 
 export default TechnologyList
-

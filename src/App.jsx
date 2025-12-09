@@ -4,17 +4,29 @@ import Navigation from './components/Navigation/Navigation'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 import Home from './pages/Home.jsx'
 import TechnologyList from './pages/TechnologyList.jsx'
-import TechnologyDetail from './pages/TechnologyDetail.jsx'
 import AddTechnology from './pages/AddTechnology.jsx'
 import Statistics from './pages/Statistics.jsx'
-import Settings from './pages/Settings.jsx'
-import Login from './pages/Login.jsx'
-import Dashboard from './pages/Dashboard.jsx'
-import useTechnologies, { initialTechnologies } from './hooks/useTechnologies'
+import useTechnologiesApi from './hooks/useTechnologiesApi'
 import './App.css'
 
 function App() {
-  const { technologies, setTechnologies, updateStatus, updateNotes, progress } = useTechnologies()
+  const {
+    technologies,
+    loading,
+    error,
+    refetch,
+    addTechnology,
+    updateStatus,
+    updateNotes,
+    searchTechnologies,
+    fetchResources,
+    importRoadmap,
+    resetToDefaults,
+    setTechnologies,
+    progress,
+    statusCounts,
+  } = useTechnologiesApi()
+
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     if (typeof window === 'undefined') return false
     return window.localStorage.getItem('isLoggedIn') === 'true'
@@ -25,13 +37,8 @@ function App() {
   })
 
   const total = technologies.length
-  const completed = technologies.filter((tech) => tech.status === 'completed').length
+  const completed = statusCounts.completed
   const completion = progress
-  const statusCounts = {
-    'not-started': technologies.filter((tech) => tech.status === 'not-started').length,
-    'in-progress': technologies.filter((tech) => tech.status === 'in-progress').length,
-    completed,
-  }
 
   const handleStatusChange = (id, nextStatus) => {
     updateStatus(id, nextStatus)
@@ -42,7 +49,7 @@ function App() {
   }
 
   const handleResetAll = () => {
-    setTechnologies(initialTechnologies.map((tech) => ({ ...tech })))
+    resetToDefaults()
   }
 
   const handlePickRandom = () => {
@@ -59,25 +66,7 @@ function App() {
   }
 
   const handleAddTechnology = (payload) => {
-    const nextId = technologies.length > 0 ? Math.max(...technologies.map((tech) => tech.id)) + 1 : 1
-    setTechnologies((prev) => [
-      ...prev,
-      {
-        id: nextId,
-        title: payload.title,
-        description: payload.description,
-        status: payload.status ?? 'not-started',
-        notes: payload.notes ?? '',
-        category: payload.category ?? 'frontend',
-      },
-    ])
-  }
-
-  const handleClearStorage = () => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.removeItem('technologies')
-    }
-    setTechnologies(initialTechnologies.map((tech) => ({ ...tech })))
+    addTechnology(payload)
   }
 
   const handleLogin = (user) => {
@@ -98,84 +87,69 @@ function App() {
     }
   }
 
+  if (loading) {
+    return (
+      <div className="app-loading">
+        <div className="spinner"></div>
+        <p>Загрузка технологий...</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="app-loading">
+        <h2>Произошла ошибка</h2>
+        <p>{error}</p>
+        <button onClick={refetch} className="retry-button">
+          Попробовать снова
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className="app-layout">
       <Navigation isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
-      <div className="app">
+      <main className="app">
         <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              total={total}
-              completed={completed}
-              completion={completion}
-              statusCounts={statusCounts}
-            />
-          }
-        />
-        <Route
-          path="/technologies"
-          element={
-            <TechnologyList
-              technologies={technologies}
-              statusCounts={statusCounts}
-              onStatusChange={handleStatusChange}
-              onNotesChange={updateTechnologyNotes}
-              onCompleteAll={handleCompleteAll}
-              onResetAll={handleResetAll}
-              onPickRandom={handlePickRandom}
-            />
-          }
-        />
-        <Route
-          path="/technologies/:id"
-          element={
-            <TechnologyDetail
-              technologies={technologies}
-              onStatusChange={handleStatusChange}
-              onNotesChange={updateTechnologyNotes}
-            />
-          }
-        />
-        <Route
-          path="/add-technology"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <AddTechnology onAddTechnology={handleAddTechnology} />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Dashboard username={username} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/statistics"
-          element={<Statistics progress={completion} statusCounts={statusCounts} />}
-        />
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Settings
-                onReset={handleResetAll}
-                onClearStorage={handleClearStorage}
-                total={total}
+          <Route
+            path="/"
+            element={<Home isLoggedIn={isLoggedIn} username={username} onLogin={handleLogin} />}
+          />
+          <Route
+            path="/technologies"
+            element={
+              <TechnologyList
+                technologies={technologies}
+                statusCounts={statusCounts}
+                onStatusChange={handleStatusChange}
+                onNotesChange={updateTechnologyNotes}
+                onCompleteAll={handleCompleteAll}
+                onResetAll={handleResetAll}
+                onPickRandom={handlePickRandom}
+                searchTechnologies={searchTechnologies}
+                onImportRoadmap={importRoadmap}
+                fetchResources={fetchResources}
               />
-            </ProtectedRoute>
-          }
-        />
+            }
+          />
+          <Route
+            path="/add-technology"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <AddTechnology onAddTechnology={handleAddTechnology} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/statistics"
+            element={<Statistics progress={completion} statusCounts={statusCounts} />}
+          />
         </Routes>
-      </div>
+      </main>
     </div>
   )
 }
 
 export default App
-

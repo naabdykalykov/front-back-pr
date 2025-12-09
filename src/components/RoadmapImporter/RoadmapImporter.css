@@ -1,0 +1,60 @@
+.roadmap-importer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  color: white;
+}
+
+.roadmap-importer h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+}
+
+.roadmap-importer__hint {
+  margin: 0 0 16px 0;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.roadmap-importer__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.import-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.import-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.import-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.roadmap-importer__message {
+  margin: 16px 0 0 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.roadmap-importer__error {
+  margin: 16px 0 0 0;
+  padding: 12px;
+  background: rgba(220, 38, 38, 0.3);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
