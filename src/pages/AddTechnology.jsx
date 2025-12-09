@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import DataImportExport from '../components/DataImportExport/DataImportExport'
 
 const categories = [
   { value: 'frontend', label: 'Frontend' },
@@ -7,7 +8,14 @@ const categories = [
   { value: 'devops', label: 'DevOps' },
 ]
 
-function AddTechnology({ onAddTechnology }) {
+function AddTechnology({
+  onAddTechnology,
+  technologies = [],
+  onExportJson,
+  onImportJson,
+  onSaveLocal,
+  onLoadLocal,
+}) {
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -80,6 +88,14 @@ function AddTechnology({ onAddTechnology }) {
           Добавить
         </button>
       </form>
+
+      <DataImportExport
+        technologies={technologies}
+        onExport={onExportJson}
+        onImport={onImportJson}
+        onSaveLocal={onSaveLocal}
+        onLoadLocal={onLoadLocal}
+      />
     </div>
   )
 }

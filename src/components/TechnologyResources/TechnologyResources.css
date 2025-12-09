@@ -76,3 +76,38 @@
   border-color: #6366f1;
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .technology-resources {
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='dark'] .technology-resources__header h3 {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .technology-resources__header button {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .technology-resources__header button:hover:not(:disabled) {
+  background: #353535;
+}
+
+:root[data-theme='dark'] .technology-resources__status {
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .technology-resources__list li a {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #90caf9;
+}
+
+:root[data-theme='dark'] .technology-resources__list li a:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
+}
+

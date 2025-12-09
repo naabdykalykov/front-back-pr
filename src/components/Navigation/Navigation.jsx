@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
+import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import './Navigation.css'
 
-function Navigation({ isLoggedIn, username, onLogout }) {
+function Navigation({ isLoggedIn, username, onLogout, isDarkMode, onThemeToggle }) {
   const location = useLocation()
 
   return (
@@ -38,6 +39,14 @@ function Navigation({ isLoggedIn, username, onLogout }) {
           <>
             <li>
               <Link
+                to="/dashboard"
+                className={location.pathname === '/dashboard' ? 'active' : ''}
+              >
+                Панель управления
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/add-technology"
                 className={location.pathname === '/add-technology' ? 'active' : ''}
               >
@@ -49,6 +58,9 @@ function Navigation({ isLoggedIn, username, onLogout }) {
       </ul>
 
       <div className="nav-user">
+        {isLoggedIn && onThemeToggle && (
+          <ThemeToggle isDarkMode={isDarkMode} onToggle={onThemeToggle} />
+        )}
         {isLoggedIn ? (
           <>
             {username && <span className="nav-username">{username}</span>}

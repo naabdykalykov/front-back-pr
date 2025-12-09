@@ -44,3 +44,24 @@
   transform: translateY(0);
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .quick-actions {
+  background: #1e1e1e;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='dark'] .quick-actions__label {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .quick-actions__buttons button {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .quick-actions__buttons button:hover {
+  background: #353535;
+  border-color: rgba(59, 130, 246, 0.5);
+}
+

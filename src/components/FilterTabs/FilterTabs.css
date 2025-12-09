@@ -22,3 +22,21 @@
   color: #fff;
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .filter-tabs button {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .filter-tabs button:hover {
+  background: #353535;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+:root[data-theme='dark'] .filter-tabs button.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+

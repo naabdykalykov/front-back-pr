@@ -9,6 +9,7 @@ const mockTechnologies = [
     difficulty: 'beginner',
     status: 'not-started',
     notes: '',
+    deadline: '',
     resources: ['https://react.dev', 'https://ru.reactjs.org'],
   },
   {
@@ -19,6 +20,7 @@ const mockTechnologies = [
     difficulty: 'intermediate',
     status: 'not-started',
     notes: '',
+    deadline: '',
     resources: ['https://nodejs.org', 'https://nodejs.org/ru/docs/'],
   },
   {
@@ -29,6 +31,7 @@ const mockTechnologies = [
     difficulty: 'intermediate',
     status: 'in-progress',
     notes: '',
+    deadline: '',
     resources: ['https://www.typescriptlang.org'],
   },
   {
@@ -39,6 +42,7 @@ const mockTechnologies = [
     difficulty: 'beginner',
     status: 'not-started',
     notes: '',
+    deadline: '',
     resources: ['https://reactrouter.com'],
   },
   {
@@ -49,6 +53,7 @@ const mockTechnologies = [
     difficulty: 'intermediate',
     status: 'in-progress',
     notes: '',
+    deadline: '',
     resources: ['https://react.dev/learn/managing-state'],
   },
   {
@@ -59,6 +64,7 @@ const mockTechnologies = [
     difficulty: 'advanced',
     status: 'completed',
     notes: '',
+    deadline: '',
     resources: ['https://testing-library.com'],
   },
 ]
@@ -98,6 +104,7 @@ function useTechnologiesApi() {
         difficulty: techData.difficulty || 'beginner',
         status: techData.status || 'not-started',
         notes: techData.notes || '',
+        deadline: techData.deadline || '',
         resources: techData.resources || [],
         createdAt: new Date().toISOString(),
       }
@@ -115,9 +122,24 @@ function useTechnologiesApi() {
     )
   }, [])
 
+  const updateStatusesBulk = useCallback((ids, newStatus) => {
+    if (!Array.isArray(ids) || ids.length === 0) return
+    setTechnologies((prev) =>
+      prev.map((tech) => (ids.includes(tech.id) ? { ...tech, status: newStatus } : tech)),
+    )
+  }, [])
+
   const updateNotes = useCallback((techId, newNotes) => {
     setTechnologies((prev) =>
       prev.map((tech) => (tech.id === techId ? { ...tech, notes: newNotes } : tech)),
+    )
+  }, [])
+
+  const updateDeadline = useCallback((techId, deadline, comment = '') => {
+    setTechnologies((prev) =>
+      prev.map((tech) =>
+        tech.id === techId ? { ...tech, deadline: deadline || '', deadlineComment: comment } : tech,
+      ),
     )
   }, [])
 
@@ -205,6 +227,29 @@ function useTechnologiesApi() {
     return roadmapTechnologies.length
   }, [])
 
+  const exportToJson = useCallback(
+    (filename = `technologies_${new Date().toISOString().split('T')[0]}.json`) => {
+      const dataStr = JSON.stringify(technologies, null, 2)
+      const dataBlob = new Blob([dataStr], { type: 'application/json' })
+      const url = URL.createObjectURL(dataBlob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    },
+    [technologies],
+  )
+
+  const importFromJson = useCallback((jsonArray) => {
+    if (!Array.isArray(jsonArray)) {
+      throw new Error('Неверный формат данных')
+    }
+    setTechnologies(jsonArray)
+  }, [])
+
   const resetToDefaults = useCallback(() => {
     setTechnologies(mockTechnologies.map((tech) => ({ ...tech })))
   }, [])
@@ -238,13 +283,17 @@ function useTechnologiesApi() {
     refetch: fetchTechnologies,
     addTechnology,
     updateStatus,
+    updateStatusesBulk,
     updateNotes,
+    updateDeadline,
     searchTechnologies,
     fetchResources,
     importRoadmap,
     resetToDefaults,
     clearTechnologies,
     setTechnologies,
+    exportToJson,
+    importFromJson,
     progress,
     statusCounts,
   }

@@ -65,3 +65,41 @@
   color: #1d4ed8;
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .technology-card {
+  background: #1e1e1e;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='dark'] .technology-card__description {
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .technology-card--completed {
+  background: rgba(22, 163, 74, 0.15);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+:root[data-theme='dark'] .technology-card--completed .technology-card__status {
+  color: #4ade80;
+}
+
+:root[data-theme='dark'] .technology-card--in-progress {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+:root[data-theme='dark'] .technology-card--in-progress .technology-card__status {
+  color: #fbbf24;
+}
+
+:root[data-theme='dark'] .technology-card--not-started {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+:root[data-theme='dark'] .technology-card--not-started .technology-card__status {
+  color: #60a5fa;
+}
+

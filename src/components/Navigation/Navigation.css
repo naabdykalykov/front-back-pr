@@ -13,6 +13,13 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+:root[data-theme='dark'] .main-navigation {
+  background: #1e1e1e;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .nav-brand {
@@ -54,9 +61,18 @@
   display: block;
 }
 
+:root[data-theme='dark'] .nav-menu a {
+  color: #ffffff;
+}
+
 .nav-menu a.active {
   background: rgba(37, 99, 235, 0.1);
   color: #2563eb;
+}
+
+:root[data-theme='dark'] .nav-menu a.active {
+  background: rgba(100, 181, 246, 0.2);
+  color: #90caf9;
 }
 
 .nav-user {
@@ -66,6 +82,11 @@
   flex-shrink: 0;
   padding-left: 16px;
   border-left: 1px solid #e5e7eb;
+  transition: border-color 0.3s ease;
+}
+
+:root[data-theme='dark'] .nav-user {
+  border-left-color: rgba(255, 255, 255, 0.12);
 }
 
 .nav-user button {
@@ -75,11 +96,22 @@
   background: #f8fafc;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background 150ms ease;
+  transition: background 150ms ease, border-color 0.3s ease, color 0.3s ease;
+  color: #0f172a;
+}
+
+:root[data-theme='dark'] .nav-user button {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .nav-user button:hover {
   background: #f1f5f9;
+}
+
+:root[data-theme='dark'] .nav-user button:hover {
+  background: #353535;
 }
 
 .nav-user .btn {
@@ -92,6 +124,11 @@
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0 4px;
+  transition: color 0.3s ease;
+}
+
+:root[data-theme='dark'] .nav-username {
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {

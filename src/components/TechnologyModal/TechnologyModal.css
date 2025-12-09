@@ -136,3 +136,37 @@
   }
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .technology-modal {
+  background: #1e1e1e;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme='dark'] .technology-modal__close {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .technology-modal__close:hover {
+  background: #353535;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .technology-modal__header {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='dark'] .technology-modal__header-content h2 {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .technology-modal__description {
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .technology-modal__category {
+  color: #9ca3af;
+}
+

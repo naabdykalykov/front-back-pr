@@ -71,3 +71,29 @@
   font-weight: 600;
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .progress-header {
+  background: #1e1e1e;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='dark'] .progress-header__label {
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .progress-header__value {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .progress-header__bar {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme='dark'] .progress-header__breakdown div {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .progress-header__breakdown dt {
+  color: #b0b0b0;
+}
+

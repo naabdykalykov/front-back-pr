@@ -1,0 +1,150 @@
+.bulk-status {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.bulk-status__header h3 {
+  margin: 0 0 4px;
+}
+
+.bulk-status__hint {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.bulk-status__form {
+  display: grid;
+  gap: 12px;
+}
+
+.bulk-status__list {
+  max-height: 240px;
+  overflow: auto;
+  border: 1px dashed #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.bulk-status__item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.bulk-status__title {
+  font-weight: 600;
+}
+
+.bulk-status__badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  text-transform: none;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.bulk-status__badge[data-status='in-progress'] {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.bulk-status__badge[data-status='completed'] {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.bulk-status__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bulk-status__select select {
+  margin-left: 8px;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.bulk-status__message {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.bulk-status__empty {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Темная тема */
+:root[data-theme='dark'] .bulk-status {
+  background: #1e1e1e;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme='dark'] .bulk-status__hint {
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .bulk-status__list {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #2a2a2a;
+}
+
+:root[data-theme='dark'] .bulk-status__item {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #2a2a2a;
+}
+
+:root[data-theme='dark'] .bulk-status__badge {
+  background: #353535;
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .bulk-status__badge[data-status='in-progress'] {
+  background: rgba(14, 165, 233, 0.2);
+  color: #7dd3fc;
+}
+
+:root[data-theme='dark'] .bulk-status__badge[data-status='completed'] {
+  background: rgba(22, 163, 74, 0.2);
+  color: #4ade80;
+}
+
+:root[data-theme='dark'] .bulk-status__select select {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .bulk-status__empty {
+  color: #9ca3af;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+

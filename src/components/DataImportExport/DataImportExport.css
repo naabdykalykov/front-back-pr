@@ -1,0 +1,113 @@
+.data-transfer {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.data-transfer__header h3 {
+  margin: 0 0 4px;
+}
+
+.data-transfer__hint {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.data-transfer__status {
+  background: #ecfeff;
+  border: 1px solid #bae6fd;
+  color: #0ea5e9;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.data-transfer__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.data-transfer__controls button,
+.data-transfer__controls label {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.data-transfer__controls button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.data-transfer__file input {
+  display: none;
+}
+
+.data-transfer__dropzone {
+  border: 2px dashed #d1d5db;
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.data-transfer__dropzone.is-dragging {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Темная тема */
+:root[data-theme='dark'] .data-transfer {
+  background: #1e1e1e;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme='dark'] .data-transfer__hint {
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .data-transfer__status {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: rgba(14, 165, 233, 0.3);
+  color: #7dd3fc;
+}
+
+:root[data-theme='dark'] .data-transfer__controls button,
+:root[data-theme='dark'] .data-transfer__controls label {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .data-transfer__dropzone {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #b0b0b0;
+}
+
+:root[data-theme='dark'] .data-transfer__dropzone.is-dragging {
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.15);
+  color: #90caf9;
+}
+

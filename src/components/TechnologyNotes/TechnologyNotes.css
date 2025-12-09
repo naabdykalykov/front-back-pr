@@ -46,3 +46,26 @@
   color: #6b7280;
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .technology-notes__field {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .technology-notes__input-wrapper input {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .technology-notes__input-wrapper input::placeholder {
+  color: #6b7280;
+}
+
+:root[data-theme='dark'] .technology-notes__length {
+  color: #9ca3af;
+}
+
+:root[data-theme='dark'] .technology-notes__hint {
+  color: #b0b0b0;
+}
+

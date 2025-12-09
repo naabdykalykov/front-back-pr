@@ -58,3 +58,8 @@
   font-size: 0.9rem;
 }
 
+/* Темная тема */
+:root[data-theme='dark'] .roadmap-importer {
+  background: linear-gradient(135deg, #4c1d95 0%, #581c87 100%);
+}
+
