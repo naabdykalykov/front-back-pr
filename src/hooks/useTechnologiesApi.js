@@ -1,75 +1,16 @@
 import { useState, useEffect, useCallback } from 'react'
 
-const mockTechnologies = [
-  {
-    id: 1,
-    title: 'React',
-    description: 'Библиотека для создания пользовательских интерфейсов',
-    category: 'frontend',
-    difficulty: 'beginner',
-    status: 'not-started',
-    notes: '',
-    deadline: '',
-    resources: ['https://react.dev', 'https://ru.reactjs.org'],
-  },
-  {
-    id: 2,
-    title: 'Node.js',
-    description: 'Среда выполнения JavaScript на сервере',
-    category: 'backend',
-    difficulty: 'intermediate',
-    status: 'not-started',
-    notes: '',
-    deadline: '',
-    resources: ['https://nodejs.org', 'https://nodejs.org/ru/docs/'],
-  },
-  {
-    id: 3,
-    title: 'TypeScript',
-    description: 'Типизированное надмножество JavaScript',
-    category: 'language',
-    difficulty: 'intermediate',
-    status: 'in-progress',
-    notes: '',
-    deadline: '',
-    resources: ['https://www.typescriptlang.org'],
-  },
-  {
-    id: 4,
-    title: 'React Router',
-    description: 'Настройка клиентского роутинга и защищённых маршрутов',
-    category: 'frontend',
-    difficulty: 'beginner',
-    status: 'not-started',
-    notes: '',
-    deadline: '',
-    resources: ['https://reactrouter.com'],
-  },
-  {
-    id: 5,
-    title: 'State Management',
-    description: 'Работа с состоянием компонентов и хуками',
-    category: 'frontend',
-    difficulty: 'intermediate',
-    status: 'in-progress',
-    notes: '',
-    deadline: '',
-    resources: ['https://react.dev/learn/managing-state'],
-  },
-  {
-    id: 6,
-    title: 'Testing Library',
-    description: 'Написание модульных тестов для компонентов',
-    category: 'frontend',
-    difficulty: 'advanced',
-    status: 'completed',
-    notes: '',
-    deadline: '',
-    resources: ['https://testing-library.com'],
-  },
-]
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const mapFromJson = (item) => ({
+  id: item.id,
+  title: item.title,
+  description: item.description || 'Описание отсутствует',
+  category: item.category || 'other',
+  difficulty: item.difficulty || 'beginner',
+  status: item.status || 'not-started',
+  notes: item.notes || '',
+  deadline: item.deadline || '',
+  resources: Array.isArray(item.resources) ? item.resources : [],
+})
 
 function useTechnologiesApi() {
   const [technologies, setTechnologies] = useState([])
@@ -81,9 +22,14 @@ function useTechnologiesApi() {
       setLoading(true)
       setError(null)
 
-      await delay(1000)
-
-      setTechnologies(mockTechnologies.map((tech) => ({ ...tech })))
+      const dataUrl = `${import.meta.env.BASE_URL}data/technologies.json`
+      const response = await fetch(dataUrl)
+      if (!response.ok) {
+        throw new Error(`Ошибка HTTP: ${response.status}`)
+      }
+      const data = await response.json()
+      const items = Array.isArray(data) ? data.map(mapFromJson) : []
+      setTechnologies(items)
     } catch (err) {
       setError('Не удалось загрузить технологии')
       console.error('Ошибка загрузки:', err)
@@ -170,62 +116,28 @@ function useTechnologiesApi() {
   const fetchResources = useCallback(
     async (techId) => {
       const technology = technologies.find((item) => item.id === techId)
-
-      await delay(800)
-
       if (!technology) {
         throw new Error('Технология не найдена')
       }
-
-      const extraResources = [
-        `https://example.com/tutorials/${technology.title.toLowerCase().replace(/\s+/g, '-')}`,
-        `https://example.com/courses/${techId}`,
-      ]
-
-      return [...(technology.resources || []), ...extraResources]
+      return technology.resources || []
     },
     [technologies],
   )
 
   const importRoadmap = useCallback(async () => {
-    await delay(1200)
-
-    const roadmapTechnologies = [
-      {
-        id: Date.now(),
-        title: 'GraphQL',
-        description: 'Язык запросов для API',
-        category: 'backend',
-        difficulty: 'intermediate',
-        status: 'not-started',
-        notes: '',
-        resources: ['https://graphql.org'],
-      },
-      {
-        id: Date.now() + 1,
-        title: 'Docker',
-        description: 'Контейнеризация приложений',
-        category: 'devops',
-        difficulty: 'intermediate',
-        status: 'not-started',
-        notes: '',
-        resources: ['https://docker.com'],
-      },
-      {
-        id: Date.now() + 2,
-        title: 'Kubernetes',
-        description: 'Оркестрация контейнеров',
-        category: 'devops',
-        difficulty: 'advanced',
-        status: 'not-started',
-        notes: '',
-        resources: ['https://kubernetes.io'],
-      },
-    ]
-
-    setTechnologies((prev) => [...prev, ...roadmapTechnologies])
-    return roadmapTechnologies.length
-  }, [])
+    const dataUrl = `${import.meta.env.BASE_URL}data/technologies.json`
+    const response = await fetch(dataUrl)
+    if (!response.ok) {
+      throw new Error('Не удалось импортировать дорожную карту')
+    }
+    const data = await response.json()
+    const items = Array.isArray(data) ? data.map(mapFromJson) : []
+    // возьмём любые 3 новых элемента, которых нет в стейте
+    const existingIds = new Set(technologies.map((t) => t.id))
+    const roadmap = items.filter((t) => !existingIds.has(t.id)).slice(0, 3)
+    setTechnologies((prev) => [...prev, ...roadmap])
+    return roadmap.length
+  }, [technologies])
 
   const exportToJson = useCallback(
     (filename = `technologies_${new Date().toISOString().split('T')[0]}.json`) => {
@@ -251,8 +163,8 @@ function useTechnologiesApi() {
   }, [])
 
   const resetToDefaults = useCallback(() => {
-    setTechnologies(mockTechnologies.map((tech) => ({ ...tech })))
-  }, [])
+    fetchTechnologies()
+  }, [fetchTechnologies])
 
   const clearTechnologies = useCallback(() => {
     setTechnologies([])

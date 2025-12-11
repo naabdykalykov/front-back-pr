@@ -24,6 +24,7 @@ function TechnologyCard({
   description,
   status = 'not-started',
   notes = '',
+  deadline,
   onStatusChange,
   onNotesChange,
 }) {
@@ -44,6 +45,11 @@ function TechnologyCard({
         <h3 className="technology-card__title">{title}</h3>
         <span className="technology-card__status">{config.label}</span>
       </header>
+      {deadline && (
+        <p className="technology-card__meta">
+          Дедлайн: <strong>{deadline}</strong>
+        </p>
+      )}
       {description && <p className="technology-card__description">{description}</p>}
       <TechnologyNotes notes={notes} techId={id} onNotesChange={onNotesChange} />
     </article>

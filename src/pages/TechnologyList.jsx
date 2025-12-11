@@ -130,6 +130,7 @@ function TechnologyList({
                 description={tech.description}
                 status={tech.status}
                 notes={tech.notes}
+                deadline={tech.deadline}
                 onNotesChange={onNotesChange}
                 onStatusChange={onStatusChange}
               />

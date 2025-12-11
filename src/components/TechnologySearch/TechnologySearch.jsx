@@ -70,7 +70,7 @@ function TechnologySearch({ searchTechnologies, onResultsChange }) {
 
     debounceRef.current = setTimeout(() => {
       triggerSearch(value)
-    }, 500)
+    }, 3000)
   }
 
   const handleClear = () => {

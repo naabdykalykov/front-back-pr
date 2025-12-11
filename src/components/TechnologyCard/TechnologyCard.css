@@ -38,6 +38,16 @@
   line-height: 1.5;
 }
 
+.technology-card__meta {
+  margin: 0 0 6px 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+:root[data-theme='dark'] .technology-card__meta {
+  color: #b0b0b0;
+}
+
 .technology-card--completed {
   border-color: #16a34a;
   background: #f0fdf4;

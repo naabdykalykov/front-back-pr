@@ -53,6 +53,9 @@ function TechnologyModal({ technology, onClose, onStatusChange, onNotesChange, f
         <div className="technology-modal__content">
           <p className="technology-modal__description">{technology.description}</p>
           <p className="technology-modal__category">Категория: {technology.category ?? 'general'}</p>
+          {technology.deadline && (
+            <p className="technology-modal__deadline">Дедлайн: {technology.deadline}</p>
+          )}
 
           <TechnologyNotes
             notes={technology.notes}
