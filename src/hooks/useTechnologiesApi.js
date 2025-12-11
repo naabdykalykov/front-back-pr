@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const mapFromJson = (item) => ({
   id: item.id,
   title: item.title,
