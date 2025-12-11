@@ -1,0 +1,135 @@
+[
+  {
+    "id": 1,
+    "title": "React",
+    "description": "Библиотека для создания пользовательских интерфейсов",
+    "category": "frontend",
+    "difficulty": "beginner",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://react.dev", "https://ru.reactjs.org"]
+  },
+  {
+    "id": 2,
+    "title": "Node.js",
+    "description": "Среда выполнения JavaScript на сервере",
+    "category": "backend",
+    "difficulty": "intermediate",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://nodejs.org", "https://nodejs.org/ru/docs/"]
+  },
+  {
+    "id": 3,
+    "title": "TypeScript",
+    "description": "Типизированное надмножество JavaScript",
+    "category": "language",
+    "difficulty": "intermediate",
+    "status": "in-progress",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://www.typescriptlang.org"]
+  },
+  {
+    "id": 4,
+    "title": "React Router",
+    "description": "Настройка клиентского роутинга и защищённых маршрутов",
+    "category": "frontend",
+    "difficulty": "beginner",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://reactrouter.com"]
+  },
+  {
+    "id": 5,
+    "title": "State Management",
+    "description": "Работа с состоянием компонентов и хуками",
+    "category": "frontend",
+    "difficulty": "intermediate",
+    "status": "in-progress",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://react.dev/learn/managing-state"]
+  },
+  {
+    "id": 6,
+    "title": "Testing Library",
+    "description": "Написание модульных тестов для компонентов",
+    "category": "frontend",
+    "difficulty": "advanced",
+    "status": "completed",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://testing-library.com"]
+  },
+  {
+    "id": 7,
+    "title": "GraphQL",
+    "description": "Язык запросов для API",
+    "category": "backend",
+    "difficulty": "intermediate",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://graphql.org"]
+  },
+  {
+    "id": 8,
+    "title": "Docker",
+    "description": "Контейнеризация приложений",
+    "category": "devops",
+    "difficulty": "intermediate",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://docker.com"]
+  },
+  {
+    "id": 9,
+    "title": "Kubernetes",
+    "description": "Оркестрация контейнеров",
+    "category": "devops",
+    "difficulty": "advanced",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://kubernetes.io"]
+  },
+  {
+    "id": 10,
+    "title": "PostgreSQL",
+    "description": "Реляционная база данных",
+    "category": "database",
+    "difficulty": "intermediate",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://www.postgresql.org/docs/"]
+  },
+  {
+    "id": 11,
+    "title": "Redis",
+    "description": "In-memory хранилище данных",
+    "category": "database",
+    "difficulty": "intermediate",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://redis.io/docs/latest/"]
+  },
+  {
+    "id": 12,
+    "title": "CI/CD",
+    "description": "Непрерывная интеграция и доставка",
+    "category": "devops",
+    "difficulty": "intermediate",
+    "status": "not-started",
+    "notes": "",
+    "deadline": "",
+    "resources": ["https://www.atlassian.com/continuous-delivery"]
+  }
+]
+
